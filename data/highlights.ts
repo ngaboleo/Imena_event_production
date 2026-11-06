@@ -1,31 +1,79 @@
 import {
-  AudioWaveform,
-  CalendarCheck,
   ClipboardCheck,
-  Clock,
-  FileText,
-  Headphones,
-  MessageSquareText,
+  ClipboardList,
+  Layers,
+  MessagesSquare,
+  PackageCheck,
+  PackageOpen,
+  PlayCircle,
   ShieldCheck,
   SlidersHorizontal,
-  Speaker,
+  Users,
   Wrench,
 } from "lucide-react";
 import type { Feature, ProcessStep } from "@/types";
 
 export const reasons: Feature[] = [
-  { icon: ShieldCheck, title: "Professional Equipment", description: "We use reliable sound equipment suitable for different types of events." },
-  { icon: AudioWaveform, title: "Clear Sound Quality", description: "Our systems are configured to provide clean and balanced audio." },
-  { icon: Wrench, title: "Professional Setup", description: "Our team handles equipment setup and preparation before the event." },
-  { icon: Clock, title: "Reliable Service", description: "We value punctuality and preparation so customers can focus on their event." },
-  { icon: Headphones, title: "Technical Support", description: "Technical assistance can be provided during events when required." },
-  { icon: SlidersHorizontal, title: "Flexible Solutions", description: "Equipment and setup can be adapted according to venue size, audience and event requirements." },
+  {
+    icon: ClipboardCheck,
+    title: "Professional Execution",
+    description: "We approach every event with careful preparation, coordination, and attention to detail.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Reliable Equipment",
+    description: "We provide professional audio-visual equipment suited to the requirements of each event.",
+  },
+  {
+    icon: Layers,
+    title: "One Production Partner",
+    description:
+      "From planning and coordination to technical production, we bring multiple event requirements together under one team.",
+  },
+  {
+    icon: Users,
+    title: "Experienced Team",
+    description:
+      "Our team works closely with clients, venues, event planners, and other suppliers to ensure smooth event execution.",
+  },
+  {
+    icon: SlidersHorizontal,
+    title: "Tailored Solutions",
+    description:
+      "Every event is different. We develop solutions according to the venue, audience, program, and client's requirements.",
+  },
 ];
 
 export const processSteps: ProcessStep[] = [
-  { icon: MessageSquareText, title: "Tell Us About Your Event", description: "Send us your event details through the form, WhatsApp or a phone call." },
-  { icon: ClipboardCheck, title: "We Review Your Requirements", description: "We look at the venue, audience size and the equipment you'll need." },
-  { icon: FileText, title: "Receive Your Quotation", description: "You receive a recommended setup and a clear quotation." },
-  { icon: CalendarCheck, title: "Confirm Your Booking", description: "We confirm your event date and the services included." },
-  { icon: Speaker, title: "Event Setup & Support", description: "We install and test everything before your event begins." },
+  {
+    icon: MessagesSquare,
+    title: "Consultation",
+    description: "We listen to your event concept, requirements, venue, and budget.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Planning",
+    description: "We develop the event and production plan according to your needs.",
+  },
+  {
+    icon: PackageCheck,
+    title: "Preparation",
+    description: "Our team coordinates equipment, personnel, logistics, and technical requirements.",
+  },
+  {
+    icon: Wrench,
+    title: "Setup",
+    description: "We install and test the required sound, lighting, LED screens, and other production equipment.",
+  },
+  {
+    icon: PlayCircle,
+    title: "Event Execution",
+    description:
+      "Our team remains involved throughout the event to ensure smooth technical and operational delivery.",
+  },
+  {
+    icon: PackageOpen,
+    title: "Breakdown",
+    description: "After the event, we safely dismantle and organize the equipment.",
+  },
 ];

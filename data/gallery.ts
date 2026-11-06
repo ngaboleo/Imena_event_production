@@ -2,36 +2,83 @@ import type { GalleryCategory, GalleryItem } from "@/types";
 
 export const galleryCategories: { id: GalleryCategory | "all"; label: string }[] = [
   { id: "all", label: "All" },
-  { id: "weddings", label: "Weddings" },
   { id: "corporate", label: "Corporate Events" },
-  { id: "private", label: "Private Events" },
-  { id: "outdoor", label: "Outdoor Events" },
+  { id: "conferences", label: "Conferences" },
+  { id: "weddings", label: "Weddings" },
+  { id: "concerts", label: "Concerts" },
+  { id: "roadshows", label: "Roadshows" },
+  { id: "live-productions", label: "Live Productions" },
 ];
 
 export const galleryCategoryLabel: Record<GalleryCategory, string> = {
-  weddings: "Wedding",
   corporate: "Corporate Event",
-  private: "Private Event",
-  outdoor: "Outdoor Event",
+  conferences: "Conference",
+  weddings: "Wedding",
+  concerts: "Concert",
+  roadshows: "Roadshow",
+  "live-productions": "Live Production",
 };
 
 /**
  * ─────────────────────────────────────────────────────────────
- *  GALLERY
- *  1. Put your photo in /public/images/gallery/
- *  2. Add an entry below. `date` is optional.
- *  The first 6 entries are also shown on the home page.
- *  The sample entries are placeholders — replace them with real events.
+ *  OUR WORK — PHOTOS & VIDEOS
+ *
+ *  Add a photo:
+ *    1. Put the file in /public/images/gallery/  (e.g. wedding-kigali.jpg)
+ *    2. Add an entry: { id, type: "image", src, alt, caption, category }
+ *
+ *  Add a video:
+ *    1. Put the .mp4 in /public/videos/ and a still frame (.jpg) next to it
+ *    2. Add an entry: { id, type: "video", src, poster, alt, caption, category }
+ *       Keep videos short and compressed (ideally under ~10 MB).
+ *
+ *  The first entries are also shown on the home page.
+ *  Only add real IMENA work, and only name clients with their permission.
  * ─────────────────────────────────────────────────────────────
  */
 export const gallery: GalleryItem[] = [
-  { id: "g1", image: { src: "/images/gallery/wedding-1.jpg", alt: "Sample: wedding reception with sound setup" }, title: "Wedding reception (sample photo)", category: "weddings", location: "[LOCATION]", date: "2026-06-20" },
-  { id: "g2", image: { src: "/images/gallery/corporate-1.jpg", alt: "Sample: corporate presentation audio" }, title: "Company conference (sample photo)", category: "corporate", location: "[LOCATION]", orientation: "portrait" },
-  { id: "g3", image: { src: "/images/gallery/outdoor-1.jpg", alt: "Sample: outdoor event speakers" }, title: "Outdoor celebration (sample photo)", category: "outdoor", location: "[LOCATION]", date: "2026-04-12" },
-  { id: "g4", image: { src: "/images/gallery/private-1.jpg", alt: "Sample: birthday party sound system" }, title: "Birthday celebration (sample photo)", category: "private", location: "[LOCATION]" },
-  { id: "g5", image: { src: "/images/gallery/wedding-2.jpg", alt: "Sample: wedding ceremony microphones" }, title: "Garden ceremony (sample photo)", category: "weddings", location: "[LOCATION]", orientation: "portrait" },
-  { id: "g6", image: { src: "/images/gallery/corporate-2.jpg", alt: "Sample: product launch sound" }, title: "Product launch (sample photo)", category: "corporate", location: "[LOCATION]", date: "2026-03-05" },
-  { id: "g7", image: { src: "/images/gallery/wedding-3.jpg", alt: "Sample: wedding speeches" }, title: "Wedding speeches (sample photo)", category: "weddings", location: "[LOCATION]" },
-  { id: "g8", image: { src: "/images/gallery/outdoor-2.jpg", alt: "Sample: community outdoor event" }, title: "Community gathering (sample photo)", category: "outdoor", location: "[LOCATION]", orientation: "portrait" },
-  { id: "g9", image: { src: "/images/gallery/private-2.jpg", alt: "Sample: family celebration" }, title: "Family celebration (sample photo)", category: "private", location: "[LOCATION]" },
+  {
+    id: "conference-production",
+    type: "image",
+    src: "/images/hero/imena-homepage-background.jpeg",
+    alt: "Conference hall with LED screens, stage lighting and front-of-house mixing consoles",
+    caption: "Conference production: LED screens, lighting and sound",
+    category: "conferences",
+  },
+  {
+    id: "lighting-video",
+    type: "video",
+    src: "/videos/imena-lighting.mp4",
+    poster: "/videos/imena-lighting-poster.jpg",
+    alt: "Close-up video of LED lighting fixtures in operation",
+    caption: "LED lighting fixtures in action",
+    category: "live-productions",
+    orientation: "portrait",
+  },
+  {
+    id: "conference-room",
+    type: "image",
+    src: "/images/gallery/imena-conference-room.jpg",
+    alt: "Meeting room arranged with delegate microphones, a lectern and a display screen",
+    caption: "Meeting room setup with delegate microphones",
+    category: "conferences",
+    orientation: "square",
+  },
+  {
+    id: "mixing-console",
+    type: "image",
+    src: "/images/gallery/imena-mixing-console.jpg",
+    alt: "Digital mixing console set up for an event",
+    caption: "Front-of-house mixing console",
+    category: "live-productions",
+  },
+  {
+    id: "line-array",
+    type: "image",
+    src: "/images/gallery/imena-line-array.jpg",
+    alt: "Line-array speakers stacked on subwoofers, prepared for an event",
+    caption: "Line-array sound system ready for deployment",
+    category: "live-productions",
+    orientation: "portrait",
+  },
 ];

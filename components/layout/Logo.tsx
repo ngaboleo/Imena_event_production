@@ -4,34 +4,48 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 /**
- * Shows your logo image when `siteConfig.logo.src` is set,
- * otherwise a text wordmark with a small level-meter mark.
+ * Header lockup: the official emblem on a compact white tile (the logo is
+ * black artwork, so it needs a light background on the dark site),
+ * followed by the company name in text so it stays legible at small sizes.
  */
-export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
+export function Logo({ className, priority = false }: { className?: string; priority?: boolean }) {
   const { logo, name } = siteConfig;
-  const src = tone === "light" && logo.lightSrc ? logo.lightSrc : logo.src;
-
   return (
-    <Link href="/" className={cn("inline-flex items-center gap-3", className)} aria-label={`${name} — home`}>
-      {src ? (
-        <Image src={src} alt={name} width={logo.width} height={logo.height} className="h-10 w-auto" priority />
-      ) : (
-        <>
-          <span aria-hidden className="flex h-7 items-end gap-[3px] text-brass-500">
-            {[45, 80, 100, 65, 35].map((h, i) => (
-              <span key={i} className="block w-[3px] rounded-full bg-current" style={{ height: `${h}%` }} />
-            ))}
-          </span>
-          <span
-            className={cn(
-              "font-display text-xl leading-none font-semibold tracking-tight whitespace-nowrap transition-colors sm:text-[1.45rem]",
-              tone === "light" ? "text-white" : "text-pine-950",
-            )}
-          >
-            {name}
-          </span>
-        </>
-      )}
+    <Link href="/" className={cn("group inline-flex items-center gap-3", className)} aria-label={`${name}, home`}>
+      <span className="flex h-11 w-14 shrink-0 items-center justify-center rounded-xl bg-white px-1.5 shadow-[0_6px_20px_-8px_rgb(47_134_255/0.6)] transition-transform duration-300 group-hover:scale-[1.04] sm:h-12 sm:w-16">
+        <Image
+          src={logo.emblem.src}
+          alt=""
+          width={logo.emblem.width}
+          height={logo.emblem.height}
+          sizes="64px"
+          priority={priority}
+          className="h-auto w-full"
+        />
+      </span>
+      <span className="leading-none">
+        <span className="block text-lg font-bold tracking-[0.14em] text-white sm:text-xl">IMENA</span>
+        <span className="mt-1 block text-[0.6rem] font-medium tracking-[0.3em] text-fog sm:text-[0.65rem]">
+          EVENT PRODUCTION
+        </span>
+      </span>
     </Link>
+  );
+}
+
+/** The complete original logo on a white panel (footer, About page). */
+export function FullLogo({ className, sizes = "176px" }: { className?: string; sizes?: string }) {
+  const { logo, name } = siteConfig;
+  return (
+    <span className={cn("inline-flex rounded-2xl bg-white p-4", className)}>
+      <Image
+        src={logo.full.src}
+        alt={`${name} logo`}
+        width={logo.full.width}
+        height={logo.full.height}
+        sizes={sizes}
+        className="h-auto w-full"
+      />
+    </span>
   );
 }

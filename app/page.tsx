@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import { GalleryPreview } from "@/components/home/GalleryPreview";
+import { AboutIntro } from "@/components/home/AboutIntro";
+import { EventsSection } from "@/components/home/EventsSection";
 import { Hero } from "@/components/home/Hero";
-import { HowItWorks } from "@/components/home/HowItWorks";
-import { Intro } from "@/components/home/Intro";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { Testimonials } from "@/components/home/Testimonials";
+import { ServicesOverview } from "@/components/home/ServicesOverview";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
-import { EquipmentSection } from "@/components/services/EquipmentSection";
-import { PackagesSection } from "@/components/services/PackagesSection";
+import { WorkPreview } from "@/components/home/WorkPreview";
 import { CallToAction } from "@/components/shared/CallToAction";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: { absolute: `${siteConfig.name} | Professional Sound for Weddings & Events` },
+  title: { absolute: siteConfig.title },
+  description: siteConfig.description,
   alternates: { canonical: "/" },
 };
 
@@ -20,14 +18,11 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Intro />
-      <ServicesSection />
+      <AboutIntro />
+      <ServicesOverview />
+      <EventsSection />
       <WhyChooseUs />
-      <PackagesSection />
-      <EquipmentSection />
-      <HowItWorks />
-      <Testimonials />
-      <GalleryPreview />
+      <WorkPreview />
       <CallToAction />
     </>
   );

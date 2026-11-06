@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "outline" | "light" | "whatsapp";
+type Variant = "primary" | "outline" | "ghost" | "white" | "whatsapp";
 type Size = "md" | "lg";
 
 const base =
@@ -9,11 +9,10 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-brass-500 text-pine-950 hover:bg-brass-400 shadow-[0_8px_24px_-10px_rgb(185_138_62/0.7)] hover:shadow-[0_12px_28px_-10px_rgb(185_138_62/0.8)]",
-  secondary: "bg-pine-900 text-white hover:bg-pine-800",
-  outline:
-    "border border-pine-900/20 text-pine-900 hover:border-pine-900 hover:bg-pine-900 hover:text-white",
-  light: "border border-white/35 text-white backdrop-blur-sm hover:bg-white hover:text-pine-950",
+    "bg-electric-600 text-white hover:bg-electric-500 shadow-[0_10px_30px_-10px_rgb(47_134_255/0.8)] hover:shadow-[0_14px_36px_-10px_rgb(47_134_255/0.9)]",
+  outline: "border border-white/25 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-night-950",
+  ghost: "text-white hover:bg-white/10",
+  white: "bg-white text-night-950 hover:bg-electric-300",
   whatsapp: "bg-[#1f9d55] text-white hover:bg-[#1a8a4a]",
 };
 
@@ -39,9 +38,15 @@ interface ButtonLinkProps {
 
 export function ButtonLink({ href, children, variant, size, className, external, ...rest }: ButtonLinkProps) {
   const classes = buttonClasses(variant, size, className);
-  if (external) {
+  // tel:, mailto: and external links are plain anchors.
+  if (external || /^(tel:|mailto:|https?:)/.test(href)) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes} {...rest}>
+      <a
+        href={href}
+        {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+        className={classes}
+        {...rest}
+      >
         {children}
       </a>
     );

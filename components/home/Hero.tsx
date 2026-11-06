@@ -1,71 +1,83 @@
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { SocialIcon } from "@/components/ui/SocialIcon";
-import { Waveform } from "@/components/ui/Waveform";
+import { siteConfig } from "@/config/site";
 import { QUOTE_HREF } from "@/data/navigation";
-import { whatsappUrl } from "@/lib/contact";
-
-const trustPoints = ["Professional setup", "Reliable equipment", "Event support"];
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-pine-950 text-white">
-      {/* REPLACE: /public/images/hero/hero.jpg — your best wide event photo (min. 2000px wide) */}
+    <section aria-labelledby="hero-title" className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-night-950">
+      {/* Official homepage photo: conference production with LED screens, lighting and mixing consoles. */}
       <Image
-        src="/images/hero/CaleboEvent.jpg"
-        alt="Guests at an evening wedding reception with a professional sound setup"
+        src="/images/hero/imena-homepage-background.jpeg"
+        alt="Conference hall produced by IMENA EVENT PRODUCTION, with LED screens, blue stage lighting and sound mixing consoles"
         fill
         priority
         sizes="100vw"
         quality={85}
-        className="-z-20 object-cover"
+        className="-z-20 animate-hero-zoom object-cover object-[50%_35%]"
       />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-pine-950/95 via-pine-950/70 to-pine-950/20" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-pine-950/80 to-transparent" />
+      {/* Overlays keep text readable while leaving the stage and LED screens visible. */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-night-950/95 via-night-950/70 to-night-950/25" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-night-950 via-night-950/60 to-transparent" />
+      <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-night-950/70 to-transparent" />
 
-      <Container className="pt-32 pb-40 sm:pt-36">
-        <div className="max-w-5xl">
-          <h1 className="animate-fade-up text-[3.4rem] leading-[0.95] sm:text-7xl lg:text-[6.5rem]">
-            Imena Event
-            <span className="block text-brass-200">Production</span>
-          </h1>
-          <p
-            className="mt-7 max-w-xl animate-fade-up text-lg leading-relaxed text-white/80 sm:text-xl"
-            style={{ animationDelay: "120ms" }}
-          >
-            {/* Professional sound solutions designed to make weddings, corporate events and special occasions sound
-            exceptional. */}
+      <Container className="pt-32 pb-20 sm:pt-40 sm:pb-28">
+        <div className="max-w-3xl">
+          <p className="flex animate-fade-up items-center gap-3 text-xs font-semibold tracking-[0.22em] text-electric-300 uppercase sm:text-sm">
+            <span aria-hidden className="h-px w-8 bg-electric-400" />
+            Event Planning, Management &amp; Audio-Visual Production
           </p>
 
-          <div className="mt-10 flex animate-fade-up flex-col gap-3 sm:flex-row" style={{ animationDelay: "220ms" }}>
-            <ButtonLink href={QUOTE_HREF} size="lg">
-              Request a quote
-            </ButtonLink>
-            <ButtonLink href={whatsappUrl()} external variant="light" size="lg">
-              <SocialIcon network="whatsapp" className="size-5" />
-              WhatsApp us
-            </ButtonLink>
-          </div>
+          <h1
+            id="hero-title"
+            className="mt-6 animate-fade-up text-[2.75rem] leading-[1] font-bold sm:text-7xl lg:text-[5.5rem]"
+            style={{ animationDelay: "80ms" }}
+          >
+            We Bring Your Events <span className="text-electric-400">to Life</span>
+          </h1>
+
+          <p
+            className="mt-7 max-w-2xl animate-fade-up text-lg leading-relaxed text-white/85 sm:text-xl"
+            style={{ animationDelay: "160ms" }}
+          >
+            At {siteConfig.name}, we provide professional event planning, coordination, and audio-visual production
+            services designed to make every event memorable and seamless.
+          </p>
 
           <ul
-            className="mt-10 flex animate-fade-up flex-wrap gap-x-6 gap-y-2 text-sm text-white/70"
-            style={{ animationDelay: "320ms" }}
+            aria-label="Services"
+            className="mt-8 flex animate-fade-up flex-wrap gap-2"
+            style={{ animationDelay: "240ms" }}
           >
-            {trustPoints.map((point) => (
-              <li key={point} className="flex items-center gap-2">
-                <Check className="size-4 text-brass-400" strokeWidth={2.2} />
-                {point}
+            {siteConfig.serviceHighlights.map((s) => (
+              <li
+                key={s}
+                className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm text-white/90 backdrop-blur-sm"
+              >
+                {s}
               </li>
             ))}
           </ul>
+
+          <div className="mt-10 flex animate-fade-up flex-col gap-3 sm:flex-row" style={{ animationDelay: "320ms" }}>
+            <ButtonLink href="/services" size="lg">
+              Our Services <ArrowRight className="size-4" />
+            </ButtonLink>
+            <ButtonLink href={QUOTE_HREF} variant="outline" size="lg">
+              Get a Quote
+            </ButtonLink>
+          </div>
+
+          <p
+            className="mt-12 animate-fade-up text-sm font-medium tracking-[0.3em] text-white/60 uppercase"
+            style={{ animationDelay: "400ms" }}
+          >
+            {siteConfig.tagline}
+          </p>
         </div>
       </Container>
-
-      {/* Signature level meter — rises once on load */}
-      <Waveform animate bars={48} className="absolute inset-x-0 bottom-0 h-20 text-brass-400/35 sm:hidden" />
-      <Waveform animate bars={96} className="absolute inset-x-0 bottom-0 hidden h-28 text-brass-400/35 sm:flex" />
     </section>
   );
 }

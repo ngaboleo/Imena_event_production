@@ -1,36 +1,43 @@
-import { siteConfig } from "@/config/site";
-import { SocialIcon, type SocialNetwork } from "@/components/ui/SocialIcon";
+import { siteConfig, type SocialNetworkKey } from "@/config/site";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 import { socialUrl } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 
-const networks: { key: keyof typeof siteConfig.social; label: string }[] = [
-  { key: "instagram", label: "Instagram" },
-  { key: "facebook", label: "Facebook" },
-  { key: "tiktok", label: "TikTok" },
-  { key: "youtube", label: "YouTube" },
-];
+const networks: SocialNetworkKey[] = ["instagram", "tiktok"];
 
-export function SocialLinks({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
+const iconClasses =
+  "inline-flex size-11 items-center justify-center rounded-full border border-edge text-white/80 transition-colors";
+
+/**
+ * Instagram and TikTok icons. A network is only linked once its URL is set
+ * in config/site.ts; until then the icon is shown with its name but no link.
+ */
+export function SocialLinks({ className }: { className?: string }) {
   return (
     <ul className={cn("flex gap-2", className)}>
-      {networks.map(({ key, label }) => (
-        <li key={key}>
-          <a
-            href={socialUrl(siteConfig.social[key])}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${siteConfig.name} on ${label}`}
-            className={cn(
-              "inline-flex size-10 items-center justify-center rounded-full border transition-colors",
-              tone === "light"
-                ? "border-white/15 text-white/75 hover:border-brass-400 hover:text-brass-400"
-                : "border-line text-pine-900 hover:border-pine-900 hover:bg-pine-900 hover:text-white",
+      {networks.map((key) => {
+        const { label, handle } = siteConfig.social[key];
+        const url = socialUrl(key);
+        return (
+          <li key={key}>
+            {url ? (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${handle} on ${label}`}
+                className={cn(iconClasses, "hover:border-electric-400 hover:bg-electric-600 hover:text-white")}
+              >
+                <SocialIcon network={key} className="size-4" />
+              </a>
+            ) : (
+              <span role="img" aria-label={`${label}: ${handle}`} title={`${label}: ${handle}`} className={iconClasses}>
+                <SocialIcon network={key} className="size-4" />
+              </span>
             )}
-          >
-            <SocialIcon network={key as SocialNetwork} className="size-4" />
-          </a>
-        </li>
-      ))}
+          </li>
+        );
+      })}
     </ul>
   );
 }

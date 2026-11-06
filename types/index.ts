@@ -3,6 +3,8 @@ import type { LucideIcon } from "lucide-react";
 export interface ImageAsset {
   src: string;
   alt: string;
+  /** Attribution for licensed placeholder photos (shown small on the image). Omit for your own photos. */
+  credit?: { text: string; href: string };
 }
 
 export interface NavItem {
@@ -10,37 +12,15 @@ export interface NavItem {
   href: string;
 }
 
-/**
- * "available" services are promoted across the site.
- * "planned" services are future expansion and are only shown as upcoming.
- */
-export type ServiceStatus = "available" | "planned";
-
-export type ServiceCategory =
-  | "sound"
-  | "planning"
-  | "decor"
-  | "lighting"
-  | "entertainment"
-  | "rentals"
-  | "media"
-  | "catering";
-
 export interface Service {
   slug: string;
   title: string;
-  shortDescription: string;
+  /** One-line summary used on compact cards (home page). */
+  summary: string;
   description: string;
   icon: LucideIcon;
-  status: ServiceStatus;
-  category: ServiceCategory;
+  /** Optional illustrative photo. Cards without one show an icon panel. */
   image?: ImageAsset;
-  features?: string[];
-  idealFor?: string[];
-  /** Pre-selected event type in the quote form when coming from this service. */
-  quoteEventType?: EventType;
-  /** Title shown in the footer's service list (shorter version). */
-  footerLabel?: string;
 }
 
 export interface Feature {
@@ -49,80 +29,79 @@ export interface Feature {
   icon: LucideIcon;
 }
 
-export interface EquipmentItem {
-  id: string;
-  name: string;
-  description: string;
-  image: ImageAsset;
+export type EventAudience = "Private" | "Corporate" | "Community";
+
+export interface EventCategory {
+  title: string;
+  icon: LucideIcon;
+  audience: EventAudience[];
 }
 
-export type GalleryCategory = "weddings" | "corporate" | "private" | "outdoor";
+export type ProcessStep = Feature;
+
+export type GalleryCategory =
+  | "corporate"
+  | "conferences"
+  | "weddings"
+  | "concerts"
+  | "roadshows"
+  | "live-productions";
 
 export interface GalleryItem {
   id: string;
-  image: ImageAsset;
-  title: string;
+  type: "image" | "video";
+  /** Image path, or the .mp4 path for videos (both in /public). */
+  src: string;
+  /** Still image shown before a video plays. Recommended for videos. */
+  poster?: string;
+  alt: string;
+  caption: string;
   category: GalleryCategory;
-  location: string;
+  orientation?: "landscape" | "portrait" | "square";
   /** Optional, ISO format: "2026-05-14" */
   date?: string;
-  /** Image proportions help the gallery layout; defaults to landscape. */
-  orientation?: "landscape" | "portrait";
 }
 
-export interface Testimonial {
-  id: string;
-  name: string;
-  /** Optional path in /public, e.g. "/images/testimonials/jane.jpg" */
-  photo?: string;
-  eventType: string;
-  quote: string;
-  rating: 1 | 2 | 3 | 4 | 5;
-  /** Keep true until replaced with a real, approved customer review. */
-  isPlaceholder?: boolean;
-}
-
-export interface ServicePackage {
-  id: string;
-  name: string;
-  summary: string;
-  features: string[];
-  highlighted?: boolean;
-}
-
-export interface ProcessStep {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-}
+/* ── Event inquiry form ─────────────────────────────────────── */
 
 export const EVENT_TYPES = [
   "Wedding",
   "Corporate Event",
-  "Conference",
-  "Private Party",
-  "Outdoor Event",
+  "Conference / Seminar",
+  "Graduation",
+  "Roadshow",
+  "Concert / Live Performance",
+  "Product Launch",
+  "Church / Community Event",
+  "Private Celebration",
+  "Awards / Ceremony",
+  "Brand Activation",
   "Other",
 ] as const;
 export type EventType = (typeof EVENT_TYPES)[number];
 
 export const SERVICE_OPTIONS = [
-  "Sound System",
-  "Microphones",
-  "Full Audio Setup",
-  "Other",
+  "Event Planning & Management",
+  "Audio-Visual Production",
+  "Sound Systems",
+  "Lighting",
+  "LED Screens",
+  "Videography",
+  "Live Streaming",
+  "Full Event Production",
+  "Not sure yet",
 ] as const;
 export type ServiceOption = (typeof SERVICE_OPTIONS)[number];
 
-export interface QuoteRequest {
+export interface InquiryRequest {
   fullName: string;
-  phone: string;
   email: string;
+  phone: string;
   eventType: EventType | "";
   eventDate: string;
   location: string;
   guests: string;
-  service: ServiceOption | "";
-  message: string;
+  services: ServiceOption[];
+  budget: string;
   contactViaWhatsApp: boolean;
 }

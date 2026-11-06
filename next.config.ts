@@ -8,6 +8,13 @@ const nextConfig: NextConfig = {
     // add its domain here:
     // remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
   },
+  // Old URLs from the previous version of the site.
+  async redirects() {
+    return [
+      { source: "/gallery", destination: "/our-work", permanent: true },
+      { source: "/services/:slug", destination: "/services", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

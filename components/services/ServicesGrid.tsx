@@ -1,13 +1,13 @@
 import { ServiceCard } from "@/components/services/ServiceCard";
-import { availableServices } from "@/data/services";
+import { services as allServices } from "@/data/services";
 import type { Service } from "@/types";
 
-export function ServicesGrid({ services = availableServices }: { services?: Service[] }) {
+export function ServicesGrid({ services = allServices }: { services?: Service[] }) {
   return (
-    <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-      {services.map((service) => (
+    <ul className="grid gap-6 md:grid-cols-2">
+      {services.map((service, i) => (
         <li key={service.slug} className="flex">
-          <ServiceCard service={service} />
+          <ServiceCard service={service} index={i} />
         </li>
       ))}
     </ul>
