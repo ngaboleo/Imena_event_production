@@ -19,8 +19,8 @@ export const siteConfig = {
   summary: "Professional Event Planning, Management & Audio-Visual Production in Kigali, Rwanda.",
   serviceHighlights: ["Sound", "Lighting", "LED Screens", "Videography", "Live Streaming"],
 
-  /** Public URL of the site. Set NEXT_PUBLIC_SITE_URL in Vercel. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  /** Public URL of the site: NEXT_PUBLIC_SITE_URL if set, otherwise Netlify's built-in `URL` (set at build time). */
+  url: process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || "http://localhost:3000",
 
   /**
    * Logo files (generated from the original logo, background removed):

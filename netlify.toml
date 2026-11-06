@@ -1,6 +1,12 @@
+# Netlify build settings for this Next.js app (these override the dashboard).
 [build]
   command = "npm run build"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Netlify's official Next.js runtime: serves pages, API routes (/api/quote),
+# image optimisation and redirects. Netlify installs it automatically.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
